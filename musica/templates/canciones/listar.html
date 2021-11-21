@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<ul>
+  {% if canciones %}
+  <ul>
     {% for cancion in canciones%}
-    <li>{{cancion.nombre}}</li>
-    <li>{{cancion.duracion}}</li>
-    <li>{{cancion.album}}</li>
-    <br>
+      <li>
+        <a href="{{ cancion.get_absolute_url }}">{{cancion.nombre}}</a>
+      </li>
+      <li>{{cancion.duracion}}</li>
+      <li>{{cancion.album}}</li>
+      <br>
     {% endfor %}
-</ul>
+  </ul>
+  {% else %}
+    <p>No hay canciones en la biblioteca.</p>
+  {% endif %}
 
+  
 {% endblock %}

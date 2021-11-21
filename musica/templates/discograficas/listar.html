@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% if discograficas %}
 <ul>
     {% for discografica in discograficas%}
-    <li>{{discografica.nombre}}</li>
+    <li>
+        <a href="{{ discografica.get_absolute_url }}">{{discografica.nombre}}</a>
+    </li>
     <br>
     {% endfor %}
 </ul>
+{% else %}
+<p>No hay discográficas en la biblioteca.</p>
+{% endif %}
+
 
 {% endblock %}

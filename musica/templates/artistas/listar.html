@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<ul>
+  {% if artistas %}
+  <ul>
     {% for artista in artistas%}
-    <li>{{artista.nombre_artista}}</li>
-    <li>{{artista.pais}}</li>
-    <br>
+      <li>
+        <a href="{{ artista.get_absolute_url }}">{{artista.nombre_artista}}</a>
+      </li>
+      <li>{{artista.pais}}</li>
+      <br>
     {% endfor %}
-</ul>
+  </ul>
+  {% else %}
+    <p>No hay artistas en la biblioteca.</p>
+  {% endif %}
 
+  
 {% endblock %}

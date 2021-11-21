@@ -1,14 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
+  {% if albums %}
+  <ul>
     {% for album in albums%}
-    <li>{{album.titulo}}</li>
-    <li>{{album.get_artistas}}</li>
+      <li>
+        <a href="{{ album.get_absolute_url }}">{{album.titulo}}</a>
+      </li>
+      <li>{{album.get_artistas}}</li>
     <li>{{album.discografica}}</li>
     <li>{{album.duracion}}</li>
-    <br>
     {% endfor %}
-</ul>
+  </ul>
+  {% else %}
+    <p>No hay albums en la biblioteca.</p>
+  {% endif %}
 
+  
 {% endblock %}

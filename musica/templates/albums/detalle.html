@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p><strong>Título:</strong> <a href="">{{album.titulo}}</a></p>
+  <p><strong>Artista/s:</strong>{{album.get_artistas}}</p>
+  <p><strong>Discográfica:</strong>{{album.discografica}}</p>
+  <p><strong>Duración:</strong>{{album.duracion}}</p>
+{% endblock %}
+

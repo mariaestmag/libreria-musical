@@ -2,8 +2,10 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth.signals import user_logged_out, user_logged_in, user_login_failed
 from django.contrib import messages
-
 from musica.models import *
+from django.views import generic
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 
 def indice(request): 
     '''
@@ -17,51 +19,95 @@ def indice(request):
 
 # ALBUMS
 
-def listar_albums(request): 
-    '''
-    Página de listar albums de nuestra web
-    '''
-    lista_albums = Album.objects.all() 
+class AlbumListView(ListView):
+    """
+    Clase genérica para listar albums
+    """
+    model = Album
+    template_name = 'albums/listar.html'
+    #paginate_by = 5
+    context_object_name = "albums"
 
-    context = {'albums': lista_albums}
+class AlbumDetailView(DetailView):
+    """
+    Clase genérica para listar detalle en albums
+    """
+    model = Album
+    template_name = 'albums/detalle.html'
 
-    return render(request, 'albums/listar.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['albums'] = Album.objects.all() 
+        return context
 
 # ARTISTAS
 
-def listar_artistas(request): 
-    '''
-    Página de listar artistas de nuestra web
-    '''
-    lista_artistas = Artista.objects.all() 
+class ArtistaListView(ListView):
+    """
+    Clase genérica para listar artistas
+    """
+    model = Artista
+    template_name = 'artistas/listar.html'
+    #paginate_by = 5
+    context_object_name = "artistas"
 
-    context = {'artistas': lista_artistas}
+class ArtistaDetailView(DetailView):
+    """
+    Clase genérica para listar detalle en artistas
+    """
+    model = Artista
+    template_name = 'artistas/detalle.html'
 
-    return render(request, 'artistas/listar.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['artistas'] = Artista.objects.all() 
+        return context
 
 # CANCIONES
 
-def listar_canciones(request): 
-    '''
-    Página de listar canciones de nuestra web
-    '''
-    lista_canciones = Cancion.objects.all() 
+class CancionListView(ListView):
+    """
+    Clase genérica para listar canciones
+    """
+    model = Cancion
+    template_name = 'canciones/listar.html'
+    #paginate_by = 5
+    context_object_name = "canciones"
 
-    context = {'canciones': lista_canciones}
+class CancionDetailView(DetailView):
+    """
+    Clase genérica para listar detalle en canciones
+    """
+    model = Cancion
+    template_name = 'canciones/detalle.html'
 
-    return render(request, 'canciones/listar.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['canciones'] = Cancion.objects.all() 
+        return context
 
 # DISCOGRAFICAS
 
-def listar_discograficas(request): 
-    '''
-    Página de listar discograficas de nuestra web
-    '''
-    lista_discograficas = Discografica.objects.all() 
+class DiscograficaListView(ListView):
+    """
+    Clase genérica para listar discográficas
+    """
+    model = Discografica
+    template_name = 'discograficas/listar.html'
+    #paginate_by = 5
+    context_object_name = "discograficas"
 
-    context = {'discograficas': lista_discograficas}
+class DiscograficaDetailView(DetailView):
+    """
+    Clase genérica para listar detalle en discográficas
+    """
+    model = Discografica
+    template_name = 'discograficas/detalle.html'
 
-    return render(request, 'discograficas/listar.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['discograficas'] = Discografica.objects.all() 
+        return context
 
 # Mensajes para LOGIN/LOGOUT
 
