@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for cancion in canciones%}
+    <li>{{cancion.nombre}}</li>
+    <li>{{cancion.duracion}}</li>
+    <li>{{cancion.album}}</li>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}Peter's Music Library{% endblock %}</title>
+  {% load static %}
+  <link rel="shortcut icon" type="image/png" href="" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+  <!-- 
+    Google font:
+    👉 Caveat
+    👉 https://fonts.google.com/specimen/Caveat?selection.family=Caveat:400,700
+  -->
+  <link href="https://fonts.googleapis.com/css?family=Caveat:400,700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">  
+</head>
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'indice' %}">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'indice' %}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Galería</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-expanded="false">
+          Artistas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'listar_artistas' %}">Listar</a>
+          {% if user.is_authenticated %}
+          <a class="dropdown-item" href="#">Crear</a>
+          <a class="dropdown-item" href="#">Modificar</a>
+          <a class="dropdown-item" href="#">Eliminar</a>
+          {% endif %}
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-expanded="false">
+          Albums
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'listar_albums' %}">Listar</a>
+          {% if user.is_authenticated %}
+          <a class="dropdown-item" href="#">Crear</a>
+          <a class="dropdown-item" href="#">Modificar</a>
+          <a class="dropdown-item" href="#">Eliminar</a>
+          {% endif %}
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-expanded="false">
+          Canciones
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'listar_canciones' %}">Listar</a>
+          {% if user.is_authenticated %}
+          <a class="dropdown-item" href="#">Crear</a>
+          <a class="dropdown-item" href="#">Modificar</a>
+          <a class="dropdown-item" href="#">Eliminar</a>
+          {% endif %}
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-expanded="false">
+          Discográficas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'listar_discograficas' %}">Listar</a>
+          {% if user.is_authenticated %}
+          <a class="dropdown-item" href="#">Crear</a>
+          <a class="dropdown-item" href="#">Modificar</a>
+          <a class="dropdown-item" href="#">Eliminar</a>
+          {% endif %}
+        </div>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-expanded="false">
+          {{user.username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        </div>
+        {% else %}
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+<!-- /Nav -->
+<!-- Body -->
+<body>
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <div class="alert {% if message.tags %} alert-{{ message.tags }}{% else %}alert-primary{% endif %}"
+      role="alert">{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+    crossorigin="anonymous"></script>
+</body>
+<!-- /Body -->
+<!-- Pagination -->
+{% block pagination %}
+{% if is_paginated %}
+<div class="pagination">
+  <span class="page-links">
+    {% if page_obj.has_previous %}
+    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+    <span class="page-current">
+      Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+    </span>
+    {% if page_obj.has_next %}
+    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Siguiente</a>
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+{% endblock %}
+<!-- /Pagination -->
+<!-- Footer -->
+<footer>
+
+</footer>
+<!-- /Footer -->
+
+</html>

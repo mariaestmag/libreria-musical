@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+    {% for album in albums%}
+    <li>{{album.titulo}}</li>
+    <li>{{album.get_artistas}}</li>
+    <li>{{album.discografica}}</li>
+    <li>{{album.duracion}}</li>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}

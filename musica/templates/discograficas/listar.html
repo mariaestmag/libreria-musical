@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for discografica in discograficas%}
+    <li>{{discografica.nombre}}</li>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}

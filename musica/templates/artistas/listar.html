@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for artista in artistas%}
+    <li>{{artista.nombre_artista}}</li>
+    <li>{{artista.pais}}</li>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}
