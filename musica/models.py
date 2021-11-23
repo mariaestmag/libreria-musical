@@ -40,7 +40,6 @@ class Album(models.Model):
     )
     artistas = models.ManyToManyField(Artista)
     titulo = models.CharField('Título album',max_length=100)
-    fecha_salida = models.DateField('Fecha de salida', blank=True, auto_now_add=True)
     formato = models.CharField(max_length=3, choices=FORMATOS)
     genero = models.CharField('Género', max_length=200, blank=True)
     discografica = models.ForeignKey(Discografica, on_delete=models.SET_NULL, null=True, verbose_name='Discográfica')
@@ -50,7 +49,7 @@ class Album(models.Model):
         return self.titulo
 
     def get_absolute_url(self):
-        return reverse('album_detalle', args=[str(self.id)])
+        return reverse('album_detalle', kwargs={'pk': self.pk})
 
     def get_artistas(self):
         return "\n".join([a.nombre_artista for a in self.artistas.all()])
@@ -59,7 +58,9 @@ class Album(models.Model):
         context = super().get_context_data(**kwargs)
         context['albums'] = Album.objects.all() 
         return context
-    
+
+    class Meta:
+        verbose_name = 'Album'
 
 class Cancion(models.Model):
     nombre = models.CharField('Nombre', max_length=50)

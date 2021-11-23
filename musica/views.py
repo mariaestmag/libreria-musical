@@ -1,21 +1,35 @@
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.db.models.query import QuerySet
+from django.http.response import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render
 from django.contrib.auth.signals import user_logged_out, user_logged_in, user_login_failed
 from django.contrib import messages
+from musica.forms import AlbumForm
 from musica.models import *
 from django.views import generic
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
+
 
 def indice(request): 
     '''
     Página de indice de nuestra web
     '''
     lista_albums = Album.objects.all() 
-
     context = {'albums': lista_albums}
-
     return render(request, 'index.html', context)
+
+def albums_mod(request):
+    lista_albums = Album.objects.all() 
+    context = {'albums': lista_albums}
+    return render(request, 'albums/listar_modificar.html', context)
+
+def albums_del(request):
+    lista_albums = Album.objects.all() 
+    context = {'albums': lista_albums}
+    return render(request, 'albums/listar_eliminar.html', context)
 
 # ALBUMS
 
@@ -26,7 +40,7 @@ class AlbumListView(ListView):
     model = Album
     template_name = 'albums/listar.html'
     #paginate_by = 5
-    context_object_name = "albums"
+    context_object_name = "albums"    
 
 class AlbumDetailView(DetailView):
     """
@@ -39,6 +53,24 @@ class AlbumDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['albums'] = Album.objects.all() 
         return context
+
+class AlbumCreateView(SuccessMessageMixin, CreateView):
+    model = Album
+    fields = '__all__'
+    template_name = 'albums/crear.html'
+    success_url = '/'
+
+class AlbumUpdateView(UpdateView):
+    model = Album
+    fields = '__all__'
+    template_name = 'albums/modificar.html'
+    success_url = '/'
+
+
+class AlbumDeleteView(SuccessMessageMixin,DeleteView):
+    model = Album
+    success_url = reverse_lazy('albums_lista')
+    template_name = 'albums/eliminar.html'
 
 # ARTISTAS
 

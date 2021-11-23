@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if albums %}
+<ul>
+    {% for album in albums %}
+    <li>
+        {{ album.titulo }}
+    </li>
+    <li>{{album.get_artistas}}</li>
+    <li>{{album.formato}}</li>
+    <li>
+        <a class="btn btn-primary" style="background-color: red;" href="{% url 'album_eliminar' album.id %}">Eliminar</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay albums en la biblioteca.</p>
+{% endif %}
+
+
+{% endblock %}
