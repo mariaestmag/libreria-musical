@@ -21,12 +21,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static 
-from musica.views import indice, albums_mod, albums_del,artistas_mod,\
+from musica.views import discograficas_del, discograficas_mod, indice, albums_mod, albums_del,artistas_mod,\
     artistas_del, canciones_mod, canciones_del, AlbumListView, AlbumDetailView,AlbumCreateView,\
     AlbumUpdateView,AlbumDeleteView,ArtistaListView,ArtistaDetailView,\
     ArtistaCreateView,ArtistaUpdateView,ArtistaDeleteView, CancionListView,\
     CancionDetailView, CancionCreateView, CancionUpdateView, CancionDeleteView, \
-    DiscograficaListView, DiscograficaDetailView
+    DiscograficaListView, DiscograficaDetailView, DiscograficaCreateView, \
+    DiscograficaUpdateView, DiscograficaDeleteView
 from django.contrib.auth.views import LogoutView
 from libreria_musical.settings import LOGOUT_REDIRECT_URL 
 
@@ -35,35 +36,39 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', indice, name ='indice'),
+    path("logout/", LogoutView.as_view(), name="logout"),
     #ALBUM
-    path('album/', albums_mod, name='listar_modificar'),
-    path('album2/', albums_del, name='listar_eliminar'),
+    path('album/', albums_mod, name='listar_modificar_album'),
+    path('album2/', albums_del, name='listar_eliminar_album'),
     path('albums/', AlbumListView.as_view(), name ='albums_lista'),
     path('album/<int:pk>', AlbumDetailView.as_view(), name='album_detalle'),
     path('album/crear/', AlbumCreateView.as_view(), name='album_crear'),
     path('album/modificar/<int:pk>', AlbumUpdateView.as_view(), name='album_modificar'),
     path('album/eliminar/<int:pk>', AlbumDeleteView.as_view(), name='album_eliminar'),
     #ARTISTA
-    path('artista/', artistas_mod, name='listar_modificar'),
-    path('artista2/', artistas_del, name='listar_eliminar'),
+    path('artista/', artistas_mod, name='listar_modificar_artista'),
+    path('artista2/', artistas_del, name='listar_eliminar_artista'),
     path('artistas/', ArtistaListView.as_view(), name ='artistas_lista'),
     path('artista/<int:pk>', ArtistaDetailView.as_view(), name='artista_detalle'),
     path('artista/crear/', ArtistaCreateView.as_view(), name='artista_crear'),
     path('artista/modificar/<int:pk>', ArtistaUpdateView.as_view(), name='artista_modificar'),
     path('artista/eliminar/<int:pk>', ArtistaDeleteView.as_view(), name='artista_eliminar'),
     #CANCION
-    path('cancion/', canciones_mod, name='listar_modificar'),
-    path('cancion2/', canciones_del, name='listar_eliminar'),
+    path('cancion/', canciones_mod, name='listar_modificar_cancion'),
+    path('cancion2/', canciones_del, name='listar_eliminar_cancion'),
     path('canciones/', CancionListView.as_view(), name ='canciones_lista'),
     path('cancion/<int:pk>', CancionDetailView.as_view(), name='cancion_detalle'),
     path('cancion/crear/', CancionCreateView.as_view(), name='cancion_crear'),
     path('cancion/modificar/<int:pk>', CancionUpdateView.as_view(), name='cancion_modificar'),
     path('cancion/eliminar/<int:pk>', CancionDeleteView.as_view(), name='cancion_eliminar'),
     #DISCOGRAFICA
+    path('discografica/', discograficas_mod, name='listar_modificar_discografica'),
+    path('discografica2/', discograficas_del, name='listar_eliminar_discografica'),
     path('discograficas/', DiscograficaListView.as_view(), name ='discograficas_lista'),
     path('discografica/<int:pk>', DiscograficaDetailView.as_view(), name='discografica_detalle'),
-    path("logout/", LogoutView.as_view(), name="logout"),
-
+    path('discografica/crear/', DiscograficaCreateView.as_view(), name='discografica_crear'),
+    path('discografica/modificar/<int:pk>', DiscograficaUpdateView.as_view(), name='discografica_modificar'),
+    path('discografica/eliminar/<int:pk>', DiscograficaDeleteView.as_view(), name='discografica_eliminar'),
 ]
 
 if settings.DEBUG:

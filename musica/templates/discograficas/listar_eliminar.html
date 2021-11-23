@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if discograficas %}
+<ul>
+    {% for discografica in discograficas %}
+    <li>
+        {{ discografica.nombre }}
+    </li>
+    <li>{{discografica.email}}</li>
+    <li>
+        <a id="delete-button" class="btn btn-primary" href="{% url 'discografica_eliminar' discografica.id %}">Eliminar</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay discograficas en la biblioteca.</p>
+{% endif %}
+
+
+{% endblock %}

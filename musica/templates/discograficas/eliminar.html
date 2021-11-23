@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Eliminar Discográfica</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <p>¿Está seguro de que quiere borrar: "{{ object }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+
+{% endblock %}

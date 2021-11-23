@@ -51,6 +51,16 @@ def canciones_del(request):
     context = {'canciones': lista_canciones}
     return render(request, 'canciones/listar_eliminar.html', context)
 
+def discograficas_mod(request):
+    lista_discograficas = Discografica.objects.all() 
+    context = {'discograficas': lista_discograficas}
+    return render(request, 'discograficas/listar_modificar.html', context)
+
+def discograficas_del(request):
+    lista_discograficas = Discografica.objects.all() 
+    context = {'discograficas': lista_discograficas}
+    return render(request, 'discograficas/listar_eliminar.html', context)
+
 # ALBUMS
 
 class AlbumListView(ListView):
@@ -79,17 +89,26 @@ class AlbumCreateView(SuccessMessageMixin, CreateView):
     fields = '__all__'
     template_name = 'albums/crear.html'
     success_url = '/'
+    success_message = 'Album creado correctamente'
 
-class AlbumUpdateView(UpdateView):
+
+class AlbumUpdateView(SuccessMessageMixin,UpdateView):
     model = Album
     fields = '__all__'
     template_name = 'albums/modificar.html'
     success_url = '/'
+    success_message = 'Album modificado correctamente'
 
-class AlbumDeleteView(SuccessMessageMixin,DeleteView):
+
+class AlbumDeleteView(DeleteView):
     model = Album
     success_url = reverse_lazy('albums_lista')
     template_name = 'albums/eliminar.html'
+    success_message = 'Album eliminado correctamente'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(AlbumDeleteView, self).delete(request, *args, **kwargs)
 
 # ARTISTAS
 
@@ -114,22 +133,24 @@ class ArtistaCreateView(SuccessMessageMixin, CreateView):
     fields = '__all__'
     template_name = 'artistas/crear.html'
     success_url = '/'
+    success_message = 'Artista creado/a correctamente'
 
-class ArtistaUpdateView(UpdateView):
+class ArtistaUpdateView(SuccessMessageMixin,UpdateView):
     model = Artista
     fields = '__all__'
     template_name = 'artistas/modificar.html'
     success_url = '/'
+    success_message = 'Artista modificado/a correctamente'
 
-class ArtistaDeleteView(SuccessMessageMixin,DeleteView):
+class ArtistaDeleteView(DeleteView):
     model = Artista
     success_url = reverse_lazy('artistas_lista')
     template_name = 'artistas/eliminar.html'
+    success_message = 'Artista eliminado/a correctamente'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['artistas'] = Artista.objects.all() 
-        return context
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(ArtistaDeleteView, self).delete(request, *args, **kwargs)
 
 # CANCIONES
 
@@ -159,22 +180,25 @@ class CancionCreateView(SuccessMessageMixin, CreateView):
     fields = '__all__'
     template_name = 'canciones/crear.html'
     success_url = '/'
+    success_message = 'Cancion creada correctamente'
 
-class CancionUpdateView(UpdateView):
+
+class CancionUpdateView(SuccessMessageMixin,UpdateView):
     model = Cancion
     fields = '__all__'
     template_name = 'canciones/modificar.html'
     success_url = '/'
+    success_message = 'Canción modificada correctamente'
 
-class CancionDeleteView(SuccessMessageMixin,DeleteView):
+class CancionDeleteView(DeleteView):
     model = Cancion
     success_url = reverse_lazy('artistas_lista')
     template_name = 'canciones/eliminar.html'
+    success_message = 'Canción eliminada correctamente'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['canciones'] = Cancion.objects.all() 
-        return context
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(CancionDeleteView, self).delete(request, *args, **kwargs)
 
 # DISCOGRAFICAS
 
@@ -198,6 +222,30 @@ class DiscograficaDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['discograficas'] = Discografica.objects.all() 
         return context
+
+class DiscograficaCreateView(SuccessMessageMixin, CreateView):
+    model = Discografica
+    fields = '__all__'
+    template_name = 'discograficas/crear.html'
+    success_url = '/'
+    success_message = 'Discográfica creada correctamente'
+
+class DiscograficaUpdateView(SuccessMessageMixin, UpdateView):
+    model = Discografica
+    fields = '__all__'
+    template_name = 'discograficas/modificar.html'
+    success_url = '/'
+    success_message = 'Discográfica modificada correctamente'
+
+class DiscograficaDeleteView(DeleteView):
+    model = Discografica
+    success_url = reverse_lazy('discograficas_lista')
+    template_name = 'discograficas/eliminar.html'
+    success_message = 'Discográfica eliminada correctamente'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(DiscograficaDeleteView, self).delete(request, *args, **kwargs)
 
 # Mensajes para LOGIN/LOGOUT
 
