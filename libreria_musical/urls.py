@@ -21,7 +21,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static #nos sirve las variables estáticas
-from musica.views import indice, AlbumListView, AlbumDetailView, ArtistaListView,ArtistaDetailView, CancionListView, CancionDetailView, DiscograficaListView, DiscograficaDetailView
+from musica.views import indice, albums_mod, albums_del, AlbumListView, AlbumDetailView,AlbumCreateView,AlbumUpdateView,AlbumDeleteView, ArtistaListView,ArtistaDetailView, CancionListView, CancionDetailView, DiscograficaListView, DiscograficaDetailView
 from django.contrib.auth.views import LogoutView
 from libreria_musical.settings import LOGOUT_REDIRECT_URL #crearemos una vista indice para poder importarla y utilizarla en patterns
 
@@ -30,8 +30,13 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', indice, name ='indice'),
+    path('album/', albums_mod, name='listar_modificar'),
+    path('album2/', albums_del, name='listar_eliminar'),
     path('albums/', AlbumListView.as_view(), name ='albums_lista'),
     path('album/<int:pk>', AlbumDetailView.as_view(), name='album_detalle'),
+    path('album/crear/', AlbumCreateView.as_view(), name='album_crear'),
+    path('album/modificar/<int:pk>', AlbumUpdateView.as_view(), name='album_modificar'),
+    path('album/eliminar/<int:pk>', AlbumDeleteView.as_view(), name='album_eliminar'),
     path('artistas/', ArtistaListView.as_view(), name ='artistas_lista'),
     path('artista/<int:pk>', ArtistaDetailView.as_view(), name='artista_detalle'),
     path('canciones/', CancionListView.as_view(), name ='canciones_lista'),

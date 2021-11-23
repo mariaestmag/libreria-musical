@@ -1,20 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Peter's Music Library{% endblock %}</title>
-  {% load static %}
   <link rel="shortcut icon" type="image/png" href="" />
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-
-  <!-- 
-    Google font:
-    👉 Caveat
-    👉 https://fonts.google.com/specimen/Caveat?selection.family=Caveat:400,700
-  -->
   <link href="https://fonts.googleapis.com/css?family=Caveat:400,700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap -->
@@ -58,9 +51,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'albums_lista' %}">Listar</a>
           {% if user.is_authenticated %}
-          <a class="dropdown-item" href="#">Crear</a>
-          <a class="dropdown-item" href="#">Modificar</a>
-          <a class="dropdown-item" href="#">Eliminar</a>
+          <a class="dropdown-item" href="{% url 'album_crear' %}">Crear</a>
+          <a class="dropdown-item" href="{% url 'listar_modificar' %}">Modificar</a>
+          <a class="dropdown-item" href="{% url 'listar_eliminar' %}">Eliminar</a>
           {% endif %}
         </div>
       </li>
@@ -113,17 +106,22 @@
 <!-- /Nav -->
 <!-- Body -->
 <body>
-  {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-    <div class="alert {% if message.tags %} alert-{{ message.tags }}{% else %}alert-primary{% endif %}"
-      role="alert">{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-10 ">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          <div class="alert {% if message.tags %} alert-{{ message.tags }}{% else %}alert-primary{% endif %}"
+            role="alert">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
-  {% block content %}{% endblock %}
-
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
