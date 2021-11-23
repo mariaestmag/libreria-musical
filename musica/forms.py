@@ -18,4 +18,20 @@ class ArtistaForm(ModelForm):
     class Meta:
         model = Artista
         fields = '__all__'
+
+class CancionForm(ModelForm):
+    '''
+    Formulario para crear canciones
+    '''
+    class Meta:
+        model = Cancion
+        fields = '__all__'
+
+class DiscograficaForm(ModelForm):
+    '''
+    Formulario para crear discográficas
+    '''
+    class Meta:
+        model = Discografica
+        fields = '__all__'
         

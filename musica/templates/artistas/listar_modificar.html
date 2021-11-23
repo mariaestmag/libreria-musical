@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if artistas %}
+<ul>
+    {% for artista in artistas %}
+    <li>
+        {{ artista.nombre_artista }}
+    </li>
+    <li>{{artista.pais}}</li>
+    <li>
+        <a class="btn btn-primary" href="{% url 'artista_modificar' artista.id %}">Modificar</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay artistas en la biblioteca.</p>
+{% endif %}
+
+
+{% endblock %}

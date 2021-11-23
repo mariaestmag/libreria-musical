@@ -31,6 +31,16 @@ def albums_del(request):
     context = {'albums': lista_albums}
     return render(request, 'albums/listar_eliminar.html', context)
 
+def artistas_mod(request):
+    lista_artistas = Artista.objects.all() 
+    context = {'artistas': lista_artistas}
+    return render(request, 'artistas/listar_modificar.html', context)
+
+def artistas_del(request):
+    lista_artistas = Artista.objects.all() 
+    context = {'artistas': lista_artistas}
+    return render(request, 'artistas/listar_eliminar.html', context)
+
 # ALBUMS
 
 class AlbumListView(ListView):
@@ -66,7 +76,6 @@ class AlbumUpdateView(UpdateView):
     template_name = 'albums/modificar.html'
     success_url = '/'
 
-
 class AlbumDeleteView(SuccessMessageMixin,DeleteView):
     model = Album
     success_url = reverse_lazy('albums_lista')
@@ -89,6 +98,23 @@ class ArtistaDetailView(DetailView):
     """
     model = Artista
     template_name = 'artistas/detalle.html'
+
+class ArtistaCreateView(SuccessMessageMixin, CreateView):
+    model = Artista
+    fields = '__all__'
+    template_name = 'artistas/crear.html'
+    success_url = '/'
+
+class ArtistaUpdateView(UpdateView):
+    model = Artista
+    fields = '__all__'
+    template_name = 'artistas/modificar.html'
+    success_url = '/'
+
+class ArtistaDeleteView(SuccessMessageMixin,DeleteView):
+    model = Artista
+    success_url = reverse_lazy('artistas_lista')
+    template_name = 'artistas/eliminar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -19,9 +19,9 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="{% url 'artistas_lista' %}">Listar</a>
           {% if user.is_authenticated %}
-          <a class="dropdown-item" href="#">Crear</a>
-          <a class="dropdown-item" href="#">Modificar</a>
-          <a class="dropdown-item" href="#">Eliminar</a>
+          <a class="dropdown-item" href="{% url 'artista_crear' %}">Crear</a>
+          <a class="dropdown-item" href="{% url 'listar_modificar' %}">Modificar</a>
+          <a class="dropdown-item" href="{% url 'listar_eliminar' %}">Eliminar</a>
           {% endif %}
         </div>
       </li>
