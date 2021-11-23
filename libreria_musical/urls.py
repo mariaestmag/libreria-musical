@@ -20,10 +20,15 @@ from django import urls, views
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls.static import static #nos sirve las variables estáticas
-from musica.views import indice, albums_mod, albums_del,artistas_mod,artistas_del, AlbumListView, AlbumDetailView,AlbumCreateView,AlbumUpdateView,AlbumDeleteView,ArtistaListView,ArtistaDetailView,ArtistaCreateView,ArtistaUpdateView,ArtistaDeleteView, CancionListView, CancionDetailView, DiscograficaListView, DiscograficaDetailView
+from django.conf.urls.static import static 
+from musica.views import indice, albums_mod, albums_del,artistas_mod,\
+    artistas_del, canciones_mod, canciones_del, AlbumListView, AlbumDetailView,AlbumCreateView,\
+    AlbumUpdateView,AlbumDeleteView,ArtistaListView,ArtistaDetailView,\
+    ArtistaCreateView,ArtistaUpdateView,ArtistaDeleteView, CancionListView,\
+    CancionDetailView, CancionCreateView, CancionUpdateView, CancionDeleteView, \
+    DiscograficaListView, DiscograficaDetailView
 from django.contrib.auth.views import LogoutView
-from libreria_musical.settings import LOGOUT_REDIRECT_URL #crearemos una vista indice para poder importarla y utilizarla en patterns
+from libreria_musical.settings import LOGOUT_REDIRECT_URL 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -47,8 +52,13 @@ urlpatterns = [
     path('artista/modificar/<int:pk>', ArtistaUpdateView.as_view(), name='artista_modificar'),
     path('artista/eliminar/<int:pk>', ArtistaDeleteView.as_view(), name='artista_eliminar'),
     #CANCION
+    path('cancion/', canciones_mod, name='listar_modificar'),
+    path('cancion2/', canciones_del, name='listar_eliminar'),
     path('canciones/', CancionListView.as_view(), name ='canciones_lista'),
     path('cancion/<int:pk>', CancionDetailView.as_view(), name='cancion_detalle'),
+    path('cancion/crear/', CancionCreateView.as_view(), name='cancion_crear'),
+    path('cancion/modificar/<int:pk>', CancionUpdateView.as_view(), name='cancion_modificar'),
+    path('cancion/eliminar/<int:pk>', CancionDeleteView.as_view(), name='cancion_eliminar'),
     #DISCOGRAFICA
     path('discograficas/', DiscograficaListView.as_view(), name ='discograficas_lista'),
     path('discografica/<int:pk>', DiscograficaDetailView.as_view(), name='discografica_detalle'),

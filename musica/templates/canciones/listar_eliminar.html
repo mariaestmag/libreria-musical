@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if canciones %}
+<ul>
+    {% for cancion in canciones %}
+    <li>
+        {{ cancion.nombre }}
+    </li>
+    <li>{{cancion.duracion}}</li>
+    <li>{{cancion.album}}</li>
+    <li>
+        <a id="delete-button" class="btn btn-primary" href="{% url 'cancion_eliminar' cancion.id %}">Eliminar</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay canciones en la biblioteca.</p>
+{% endif %}
+
+
+{% endblock %}

@@ -41,6 +41,16 @@ def artistas_del(request):
     context = {'artistas': lista_artistas}
     return render(request, 'artistas/listar_eliminar.html', context)
 
+def canciones_mod(request):
+    lista_canciones = Cancion.objects.all() 
+    context = {'canciones': lista_canciones}
+    return render(request, 'canciones/listar_modificar.html', context)
+
+def canciones_del(request):
+    lista_canciones = Cancion.objects.all() 
+    context = {'canciones': lista_canciones}
+    return render(request, 'canciones/listar_eliminar.html', context)
+
 # ALBUMS
 
 class AlbumListView(ListView):
@@ -138,6 +148,28 @@ class CancionDetailView(DetailView):
     """
     model = Cancion
     template_name = 'canciones/detalle.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['canciones'] = Cancion.objects.all() 
+        return context
+
+class CancionCreateView(SuccessMessageMixin, CreateView):
+    model = Cancion
+    fields = '__all__'
+    template_name = 'canciones/crear.html'
+    success_url = '/'
+
+class CancionUpdateView(UpdateView):
+    model = Cancion
+    fields = '__all__'
+    template_name = 'canciones/modificar.html'
+    success_url = '/'
+
+class CancionDeleteView(SuccessMessageMixin,DeleteView):
+    model = Cancion
+    success_url = reverse_lazy('artistas_lista')
+    template_name = 'canciones/eliminar.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
