@@ -1,5 +1,12 @@
-#delete-button{
-    background-color: red;
-    color: white;
-    border: solid 1px red;
+#delete-button {
+  background-color: red;
+  color: white;
+  border: solid 1px red;
 }
+
+#cover-not-found {
+  border: solid 1px black;
+  width: 150px;
+  height: 150px;
+}
+

@@ -20,5 +20,5 @@ class CancionAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['titulo','formato','get_artistas']
+    list_display = ['titulo','formato','get_artistas','cover']
     list_filter = ['discografica','genero']

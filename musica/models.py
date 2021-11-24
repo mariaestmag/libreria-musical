@@ -45,6 +45,7 @@ class Album(models.Model):
     genero = models.CharField('Género', max_length=200, blank=True)
     discografica = models.ForeignKey(Discografica, on_delete=models.SET_NULL, null=True, verbose_name='Discográfica')
     duracion = models.DecimalField('Duración total',max_digits=6, decimal_places=2, default=0.00)
+    cover = models.ImageField(upload_to="imagenes/", blank=True);
 
     def __str__(self):
         return self.titulo
@@ -84,9 +85,8 @@ def get_upload_to(instancia, filename):
 
 class Imagen(models.Model):
     titulo = models.CharField(max_length=255, verbose_name='título')
-    file = models.ImageField(upload_to="imagenes/%Y/%m/%d/", verbose_name='imagen',
+    file = models.ImageField(upload_to="imagenes/", verbose_name='imagen',
         height_field= 'alto', width_field='ancho')
-    
     ancho = models.IntegerField(editable=False, default=0)
     alto = models.IntegerField(editable=False, default=0)
     fecha_subida = models.DateTimeField(verbose_name='Fecha de subida', auto_now_add=True,

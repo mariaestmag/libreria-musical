@@ -1,20 +1,26 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  {% if albums %}
-  <ul>
-    {% for album in albums%}
-      <li>
-        <a href="{{ album.get_absolute_url }}">{{album.titulo}}</a>
-      </li>
-      <li>{{album.get_artistas}}</li>
-    <li>{{album.discografica}}</li>
-    <li>{{album.duracion}}</li>
-    <li>{{album.formato}}</li>
-    {% endfor %}
-  </ul>
+{% if albums %}
+<ul>
+  {% for album in albums%}
+  <li>
+    <a href="{{ album.get_absolute_url }}">{{album.titulo}}</a>
+  </li>
+  <li>{{album.get_artistas}}</li>
+  <li>{{album.discografica}}</li>
+  <li>{{album.duracion}}</li>
+  <li>{{album.formato}}</li>
+  {% if album.cover %} <!--Subida desde admin-->
+  <img src="{{ album.cover.url }}" />
   {% else %}
-    <p>No hay albums en la biblioteca.</p>
+  <img id="cover-not-found" src="{% static 'icons/not-found.png' %}" width="150px" height="150px" style="border: solid 1px black" />
   {% endif %}
-  
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay albums en la biblioteca.</p>
+{% endif %}
+
 {% endblock %}

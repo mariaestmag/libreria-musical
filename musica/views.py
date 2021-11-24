@@ -270,11 +270,6 @@ class ImagenesListView(ListView):
     #paginate_by = 10
     ordering = ['-fecha_subida']
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['imagenes'] = Imagen.objects.all() 
-        return context
-
 class ImagenCreateView(SuccessMessageMixin, CreateView):
     model = Imagen
     fields = '__all__'

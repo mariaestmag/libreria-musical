@@ -3,12 +3,12 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    <h1>Galería</h1>
-    
-    <ul>
+<h1>Galería</h1>
+
+<ul>
     {% for img in imagenes %}
-        <li><img src="{{img.file.url}}" alt="imagen"></li>
+    <li><img src="{{img.file.url}}" alt="imagen"></li> <!--Subidas desde localhost-->
     {% endfor %}
-    </ul>
+</ul>
 
 {% endblock%}
