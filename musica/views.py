@@ -260,3 +260,30 @@ user_logged_in.connect(mensaje_entrar)
 def mensaje_entrar(sender, user, request, **kwargs):
     messages.info(request, 'Fallo en inicio de sesión. Inténtelo de nuevo.')
 user_login_failed.connect(mensaje_entrar)
+
+# Subida y manejo de imágenes
+
+class ImagenesListView(ListView):
+    model = Imagen
+    template_name = 'imagenes/imagenes_list.html'
+    context_object_name = 'imagenes'
+    #paginate_by = 10
+    ordering = ['-fecha_subida']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['imagenes'] = Imagen.objects.all() 
+        return context
+
+class ImagenCreateView(SuccessMessageMixin, CreateView):
+    model = Imagen
+    fields = '__all__'
+    template_name = 'imagenes/imagen_crear.html'
+    success_url = '/'
+    # form_class = AuthorForm
+    success_message = "%(titulo)s se ha subido correctamente"
+
+    def form_valid(self, form):
+        if self.request.user.is_authenticated:
+            form.instance.subida_por = self.request.user
+        return super().form_valid(form)

@@ -27,7 +27,7 @@ from musica.views import discograficas_del, discograficas_mod, indice, albums_mo
     ArtistaCreateView,ArtistaUpdateView,ArtistaDeleteView, CancionListView,\
     CancionDetailView, CancionCreateView, CancionUpdateView, CancionDeleteView, \
     DiscograficaListView, DiscograficaDetailView, DiscograficaCreateView, \
-    DiscograficaUpdateView, DiscograficaDeleteView
+    DiscograficaUpdateView, DiscograficaDeleteView, ImagenCreateView, ImagenesListView
 from django.contrib.auth.views import LogoutView
 from libreria_musical.settings import LOGOUT_REDIRECT_URL 
 
@@ -37,6 +37,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', indice, name ='indice'),
     path("logout/", LogoutView.as_view(), name="logout"),
+    path('mostrar/', ImagenesListView.as_view(), name='galeria'),
+    path('crear', ImagenCreateView.as_view(),name="creaimagen" ),
     #ALBUM
     path('album/', albums_mod, name='listar_modificar_album'),
     path('album2/', albums_del, name='listar_eliminar_album'),
