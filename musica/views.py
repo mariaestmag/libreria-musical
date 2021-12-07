@@ -137,6 +137,11 @@ class ArtistaDetailView(DetailView):
     model = Artista
     template_name = 'artistas/detalle.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['albums'] = Album.objects.all() 
+        return context
+
 class ArtistaCreateView(SuccessMessageMixin, CreateView):
     '''
     Clase para crear artistas
@@ -248,6 +253,11 @@ class DiscograficaDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['discograficas'] = Discografica.objects.all() 
+        return context
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['albums'] = Album.objects.all() 
         return context
 
 class DiscograficaCreateView(SuccessMessageMixin, CreateView):

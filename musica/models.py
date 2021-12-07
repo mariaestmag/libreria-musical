@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.base import Model
 from django.urls import reverse
 from django.conf import settings
+from django_resized import ResizedImageField
+
 
 class Artista(models.Model):
     nombre_artista = models.CharField('Nombre',max_length=100)
@@ -45,7 +47,7 @@ class Album(models.Model):
     genero = models.CharField('Género', max_length=200, blank=True)
     discografica = models.ForeignKey(Discografica, on_delete=models.SET_NULL, null=True, verbose_name='Discográfica')
     duracion = models.DecimalField('Duración total',max_digits=6, decimal_places=2, default=0.00)
-    cover = models.ImageField(upload_to="imagenes/", blank=True)
+    cover = ResizedImageField(size=[240, 240],quality=100,upload_to="imagenes" ,blank=True, null=True)
 
     def __str__(self):
         return self.titulo
@@ -85,7 +87,7 @@ def get_upload_to(instancia, filename):
 
 class Imagen(models.Model):
     titulo = models.CharField(max_length=255, verbose_name='título')
-    file = models.ImageField(upload_to="imagenes/", verbose_name='imagen',
+    file = models.ImageField(upload_to="imagenes", verbose_name='imagen',
         height_field= 'alto', width_field='ancho')
     ancho = models.IntegerField(editable=False, default=0)
     alto = models.IntegerField(editable=False, default=0)
@@ -99,4 +101,3 @@ class Imagen(models.Model):
     
     def __str__(self):
         return self.titulo
-##PUEDE SER QUE QUITANDO LA FECHA SUBIDA Y HACIENDO MIGRACIÓN SALGA

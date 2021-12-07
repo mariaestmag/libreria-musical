@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Modificar Album:</h1>
-<form action="" method="post">
+<form method="POST" enctype="multipart/form-data"> <!--UpdateView hace el resto pero hay que ponerlo-->
   {% csrf_token %}
   <table>
     {{ form.as_table }}
