@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import fields
+from django.utils.html import format_html
 
-# Register your models here.
 from .models import Artista, Discografica, Cancion, Album
 
 @admin.register(Artista)
@@ -20,5 +20,12 @@ class CancionAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ['titulo','formato','get_artistas','cover']
+    list_display = ['titulo','formato','get_artistas','cover','thumbnail']
     list_filter = ['discografica','genero']
+
+    '''
+    Miniatura para previsualizar imagen
+    '''
+    def thumbnail(self, obj):
+        return format_html('<img src="{}" style="width: 70px; height: 70px"/>'.format(obj.cover.url))
+    thumbnail.short_description = 'thumbnail'

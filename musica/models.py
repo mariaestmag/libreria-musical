@@ -45,7 +45,7 @@ class Album(models.Model):
     genero = models.CharField('Género', max_length=200, blank=True)
     discografica = models.ForeignKey(Discografica, on_delete=models.SET_NULL, null=True, verbose_name='Discográfica')
     duracion = models.DecimalField('Duración total',max_digits=6, decimal_places=2, default=0.00)
-    cover = models.ImageField(upload_to="imagenes/", blank=True);
+    cover = models.ImageField(upload_to="imagenes/", blank=True)
 
     def __str__(self):
         return self.titulo
@@ -99,3 +99,4 @@ class Imagen(models.Model):
     
     def __str__(self):
         return self.titulo
+##PUEDE SER QUE QUITANDO LA FECHA SUBIDA Y HACIENDO MIGRACIÓN SALGA

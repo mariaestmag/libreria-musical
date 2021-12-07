@@ -85,6 +85,9 @@ class AlbumDetailView(DetailView):
         return context
 
 class AlbumCreateView(SuccessMessageMixin, CreateView):
+    '''
+    Clase para crear álbumes
+    '''
     model = Album
     fields = '__all__'
     template_name = 'albums/crear.html'
@@ -93,6 +96,9 @@ class AlbumCreateView(SuccessMessageMixin, CreateView):
 
 
 class AlbumUpdateView(SuccessMessageMixin,UpdateView):
+    '''
+    Clase para modificar álbumes
+    '''
     model = Album
     fields = '__all__'
     template_name = 'albums/modificar.html'
@@ -101,6 +107,9 @@ class AlbumUpdateView(SuccessMessageMixin,UpdateView):
 
 
 class AlbumDeleteView(DeleteView):
+    '''
+    Clase para eliminar álbumes
+    '''
     model = Album
     success_url = reverse_lazy('albums_lista')
     template_name = 'albums/eliminar.html'
@@ -129,6 +138,9 @@ class ArtistaDetailView(DetailView):
     template_name = 'artistas/detalle.html'
 
 class ArtistaCreateView(SuccessMessageMixin, CreateView):
+    '''
+    Clase para crear artistas
+    '''
     model = Artista
     fields = '__all__'
     template_name = 'artistas/crear.html'
@@ -136,6 +148,9 @@ class ArtistaCreateView(SuccessMessageMixin, CreateView):
     success_message = 'Artista creado/a correctamente'
 
 class ArtistaUpdateView(SuccessMessageMixin,UpdateView):
+    '''
+    Clase para modificar artistas
+    '''
     model = Artista
     fields = '__all__'
     template_name = 'artistas/modificar.html'
@@ -143,6 +158,9 @@ class ArtistaUpdateView(SuccessMessageMixin,UpdateView):
     success_message = 'Artista modificado/a correctamente'
 
 class ArtistaDeleteView(DeleteView):
+    '''
+    Clase para borrar artistas
+    '''
     model = Artista
     success_url = reverse_lazy('artistas_lista')
     template_name = 'artistas/eliminar.html'
@@ -176,6 +194,9 @@ class CancionDetailView(DetailView):
         return context
 
 class CancionCreateView(SuccessMessageMixin, CreateView):
+    '''
+    Clase para crear canciones
+    '''
     model = Cancion
     fields = '__all__'
     template_name = 'canciones/crear.html'
@@ -184,6 +205,9 @@ class CancionCreateView(SuccessMessageMixin, CreateView):
 
 
 class CancionUpdateView(SuccessMessageMixin,UpdateView):
+    '''
+    Clase para modificar canciones
+    '''
     model = Cancion
     fields = '__all__'
     template_name = 'canciones/modificar.html'
@@ -191,6 +215,9 @@ class CancionUpdateView(SuccessMessageMixin,UpdateView):
     success_message = 'Canción modificada correctamente'
 
 class CancionDeleteView(DeleteView):
+    '''
+    Clase para borrar canciones
+    '''
     model = Cancion
     success_url = reverse_lazy('artistas_lista')
     template_name = 'canciones/eliminar.html'
@@ -224,6 +251,9 @@ class DiscograficaDetailView(DetailView):
         return context
 
 class DiscograficaCreateView(SuccessMessageMixin, CreateView):
+    '''
+    Clase para crear discográfica
+    '''
     model = Discografica
     fields = '__all__'
     template_name = 'discograficas/crear.html'
@@ -231,6 +261,9 @@ class DiscograficaCreateView(SuccessMessageMixin, CreateView):
     success_message = 'Discográfica creada correctamente'
 
 class DiscograficaUpdateView(SuccessMessageMixin, UpdateView):
+    '''
+    Clase para modificar discográficas
+    '''
     model = Discografica
     fields = '__all__'
     template_name = 'discograficas/modificar.html'
@@ -238,6 +271,9 @@ class DiscograficaUpdateView(SuccessMessageMixin, UpdateView):
     success_message = 'Discográfica modificada correctamente'
 
 class DiscograficaDeleteView(DeleteView):
+    '''
+    Clase para borrar discográficas
+    '''
     model = Discografica
     success_url = reverse_lazy('discograficas_lista')
     template_name = 'discograficas/eliminar.html'
