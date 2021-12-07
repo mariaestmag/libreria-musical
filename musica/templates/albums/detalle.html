@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p><strong>Título:</strong>{{album.titulo}}</p>
-  <p><strong>Artista/s:</strong>{{album.get_artistas}}</p>
-  <p><strong>Discográfica:</strong>{{album.discografica}}</p>
-  <p><strong>Duración:</strong>{{album.duracion}}</p>
+<br>
+  <p><strong>Título:</strong> {{album.titulo}}</p>
+  <p><strong>Artista/s:</strong> {{album.get_artistas}}</p>
+  <p><strong>Discográfica:</strong> {{album.discografica}}</p>
+  <p><strong>Duración:</strong> {{album.duracion}}</p>
   <img src="{{ album.cover.url }}" />
 {% endblock %}
 

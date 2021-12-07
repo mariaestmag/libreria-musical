@@ -1,22 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if canciones %}
-<ul>
-    {% for cancion in canciones %}
-    <li>
-        {{ cancion.nombre }}
-    </li>
-    <li>{{cancion.duracion}}</li>
-    <li>{{cancion.album}}</li>
-    <li>
-        <a class="btn btn-primary" href="{% url 'cancion_modificar' cancion.id %}">Modificar</a>
-    </li>
+<br><br>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Duración</th>
+      <th scope="col">Album</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  {% if canciones %}
+  <tbody>
+    {% for cancion in canciones%}
+    <tr>
+      <td>{{cancion.nombre}}</td>
+      <td>{{cancion.duracion}}</td>
+      <td>{{cancion.album}}</td>
+      <td><a id="modify-button" class="btn btn-warning" href="{% url 'cancion_modificar' cancion.id %}">Modificar</a></td>
+    </tr>
     {% endfor %}
-</ul>
-{% else %}
-<p>No hay canciones en la biblioteca.</p>
+  </tbody>
+  {% else %}
+  <p>No hay canciones en la biblioteca.</p>
 {% endif %}
-
+</table>
 
 {% endblock %}

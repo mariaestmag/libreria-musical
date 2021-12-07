@@ -2,25 +2,29 @@
 {% load static %}
 
 {% block content %}
+<br>
 {% if albums %}
-<ul>
+<div class="row">
   {% for album in albums%}
-  <li>
-    <a href="{{ album.get_absolute_url }}">{{album.titulo}}</a>
-  </li>
-  <li>{{album.get_artistas}}</li>
-  <li>{{album.discografica}}</li>
-  <li>{{album.duracion}}</li>
-  <li>{{album.formato}}</li>
-  {% if album.cover %} 
-  <img src="{{ album.cover.url }}" />
-  {% else %}
-  <img id="cover-not-found" src="{% static 'icons/not-found.png' %}" width="150px" height="150px" style="border: solid 1px black" />
-  {% endif %}
+  <div class="col-sm-2">
+    <div class="card text-center" style="width: 10rem;">
+      <img class="card-img-top" src="{{ album.cover.url }}" alt="album cover">
+      <div class="card-body">
+        <h5 class="card-title">{{album.titulo}}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{album.get_artistas}}</li>
+        <li class="list-group-item">{{album.discografica}}</li>
+        <li class="list-group-item">{{album.duracion}}</li>
+        <li class="list-group-item">{{album.get_formato_display}}</li>
+      </ul>
+      <div class="card-body">
+        <a href="{{ album.get_absolute_url }}" class="card-link">Más información</a>
+      </div>
+    </div>
+  </div>
   {% endfor %}
-</ul>
-{% else %}
-<p>No hay albums en la biblioteca.</p>
+</div>
 {% endif %}
 
 {% endblock %}

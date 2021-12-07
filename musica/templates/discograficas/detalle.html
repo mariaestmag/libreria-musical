@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p><strong>Nombre:</strong>{{discografica.nombre}}</p>
-  <hr>
-  <p><strong>Artistas y discos subidos:</strong>
-  
-    {% if albums %}
-  <ul>
-    {% for album in albums%}
-    <li>
-      <a href="{{ album.get_absolute_url }}">{{album.titulo}}</a>
-      <p>{{album.get_artistas}}</p>
-    </li>
-    {% endfor %}
-    {% endif %}
-  </ul>
-  </p>
-{% endblock %}
+<br>
+<p><strong>Nombre:</strong> {{discografica.nombre}}</p>
+<hr>
+<p><strong>Artistas y discos subidos:</strong>
 
+  {% if albums %}
+<ul>
+  {% for album in albums%}
+  <li>
+    <a href="{{ album.get_absolute_url }}">{{album.titulo}}</a>
+    <p>{{album.get_artistas}}</p>
+  </li>
+  {% endfor %}
+  {% endif %}
+</ul>
+</p>
+{% endblock %}

@@ -1,19 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br><br>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">País</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
   {% if artistas %}
-  <ul>
+  <tbody>
     {% for artista in artistas%}
-      <li>
-        <a href="{{ artista.get_absolute_url }}">{{artista.nombre_artista}}</a>
-      </li>
-      <li>{{artista.pais}}</li>
-      <br>
+    <tr>
+      <td>{{artista.nombre_artista}}</td>
+      <td>{{artista.pais}}</td>
+      <td><button><a href="{{ artista.get_absolute_url }}">+ INFO</a></button></td>
+    </tr>
     {% endfor %}
-  </ul>
+  </tbody>
   {% else %}
-    <p>No hay artistas en la biblioteca.</p>
-  {% endif %}
+  <p>No hay artistas en la biblioteca.</p>
+{% endif %}
+</table>
 
-  
 {% endblock %}

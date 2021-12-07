@@ -1,21 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if artistas %}
-<ul>
-    {% for artista in artistas %}
-    <li>
-        {{ artista.nombre_artista }}
-    </li>
-    <li>{{artista.pais}}</li>
-    <li>
-        <a id="delete-button" class="btn btn-primary" href="{% url 'artista_eliminar' artista.id %}">Eliminar</a>
-    </li>
+<br><br>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">País</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  {% if artistas %}
+  <tbody>
+    {% for artista in artistas%}
+    <tr>
+      <td>{{artista.nombre_artista}}</td>
+      <td>{{artista.pais}}</td>
+      <td><a id="modify-button" class="btn btn-danger" href="{% url 'artista_eliminar' artista.id %}">Eliminar</a></td>
+    </tr>
     {% endfor %}
-</ul>
-{% else %}
-<p>No hay artistas en la biblioteca.</p>
+  </tbody>
+  {% else %}
+  <p>No hay artistas en la biblioteca.</p>
 {% endif %}
-
+</table>
 
 {% endblock %}

@@ -1,22 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if albums %}
-<ul>
-    {% for album in albums %}
-    <li>
-        {{ album.titulo }}
-    </li>
-    <li>{{album.get_artistas}}</li>
-    <li>{{album.formato}}</li>
-    <li>
-        <a id="delete-button" class="btn btn-primary" href="{% url 'album_eliminar' album.id %}">Eliminar</a>
-    </li>
+<br><br>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Título</th>
+      <th scope="col">Artista/s</th>
+      <th scope="col">Formato</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  {% if albums %}
+  <tbody>
+    {% for album in albums%}
+    <tr>
+      <td>{{album.titulo}}</td>
+      <td>{{album.get_artistas}}</td>
+      <td>{{album.get_formato_display}}</td>
+      <td><a id="modify-button" class="btn btn-danger" href="{% url 'album_eliminar' album.id %}">Eliminar</a></td>
+    </tr>
     {% endfor %}
-</ul>
-{% else %}
-<p>No hay albums en la biblioteca.</p>
+  </tbody>
+  {% else %}
+  <p>No hay álbums en la biblioteca.</p>
 {% endif %}
-
+</table>
 
 {% endblock %}

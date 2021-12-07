@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>Modificar Discografica:</h1>
+<br>
+<h3>Modificar Discográfica:</h3>
+<br>
 <form action="" method="post">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
   </table>
+  <br>
   <input type="submit" value="Modificar">
 </form>
 {% endblock %}

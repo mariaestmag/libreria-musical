@@ -2,14 +2,22 @@
 
 {% block content %}
 
-<h3>Últimos albums añadidos</h3>
-<ul>
-    {% for album in albums%}
-    <li>{{album.titulo}}</li>
-    <li>{{album.get_artistas}}</li>
-    <li>{{album.discografica}}</li>
-    <li>{{album.duracion}}</li>
-    {% endfor %}
-</ul>
+<br><br>
+    <h3>Últimos albums añadidos</h3>
+    <div class="row">
+        {% for album in albums%}
+        <div class="col-sm-2">
+            <div class="card text-center" style="width: 10rem;">
+                <img src="{{ album.cover.url }}" class="card-img-top" alt="preview-album">
+                <img class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{album.titulo}}</h5>
+                    <p class="card-text">{{album.get_artistas}}</p>
+                    <p class="card-text">{{album.discografica}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>Modificar Album:</h1>
+<br>
+<h3>Modificar Album:</h3>
+<br>
 <form method="POST" enctype="multipart/form-data"> <!--UpdateView hace el resto pero hay que ponerlo-->
   {% csrf_token %}
   <table>
     {{ form.as_table }}
   </table>
+  <br>
   <input type="submit" value="Modificar">
 </form>
 {% endblock %}

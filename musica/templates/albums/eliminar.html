@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>Eliminar Album</h1>
-
+<br>
+<h3>Eliminar Album</h3>
 <form method="post">
     {% csrf_token %}
     <p>¿Está seguro de que quiere borrar: "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
+    <input type="submit" value="Confirmar">
 </form>
 
 {% endblock %}

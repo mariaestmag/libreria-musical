@@ -1,24 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if canciones %}
-<ul>
-  {% for cancion in canciones%}
-  <li>
-    <p><strong>Título:</strong><a href="{{ cancion.get_absolute_url }}">{{cancion.nombre}}</a></p>
-  </li>
-  <li>
-    <p><strong>Duración:</strong>{{cancion.duracion}}</p>
-  </li>
-  <li>
-    <p><strong>Álbum:</strong>{{cancion.album}}</p>
-  </li>
-  <br>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No hay canciones en la biblioteca.</p>
+<br><br>
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Título</th>
+      <th scope="col">Duración</th>
+      <th scope="col">Album</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  {% if canciones %}
+  <tbody>
+    {% for cancion in canciones%}
+    <tr>
+      <td>{{cancion.nombre}}</td>
+      <td>{{cancion.duracion}}</td>
+      <td>{{cancion.album}}</td>
+      <td><button><a href="{{ cancion.get_absolute_url }}">+ INFO</a></button></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% else %}
+  <p>No hay canciones en la biblioteca.</p>
 {% endif %}
-
+</table>
 
 {% endblock %}
