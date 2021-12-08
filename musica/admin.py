@@ -6,7 +6,7 @@ from .models import Artista, Discografica, Cancion, Album
 
 @admin.register(Artista)
 class ArtistaAdmin(admin.ModelAdmin):
-    list_display = ['nombre_artista','pais','album']
+    list_display = ['nombre_artista','pais']
     list_filter = ['pais'] 
     search_fields = ['nombre_artista', 'album__genero']
     '''Relaciones N:M y con FK, hay que referirlas con dos barras bajas.
