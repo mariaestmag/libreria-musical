@@ -93,6 +93,9 @@ class Cancion(models.Model):
         context = super().get_context_data(**kwargs)
         context['canciones'] = Cancion.objects.all() 
         return context
+    
+    def get_genero(self):
+        return "\n".join([a.genero for a in self.album()])
 
 def get_upload_to(instancia, filename):
     return instancia.get_upload_to(filename)
