@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.base import Model
 from django.urls import reverse
 from django.conf import settings
-from django_resized import ResizedImageField
 
 
 class Artista(models.Model):
@@ -41,13 +40,26 @@ class Album(models.Model):
         ('CD', 'Compact Disc'),
         ('CST', 'Cassette'),
     )
+    GENEROS = (
+        ('ROCK', 'Rock&Roll'),
+        ('POP', 'Pop'),
+        ('CLAS', 'Clásica'),
+        ('RNB', 'Rhythm and Blues'),
+        ('DISC', 'Disco'),
+        ('COUN', 'Country'),
+        ('JAZZ', 'Jazz'),
+        ('REGG', 'Reggae'),
+        ('FLAM', 'Flamenco'),
+        ('BSO', 'Bandas Sonoras'),
+        ('BAL', 'Baladas'),
+    )
     artistas = models.ManyToManyField(Artista)
     titulo = models.CharField('Título album',max_length=100)
     formato = models.CharField(max_length=3, choices=FORMATOS)
-    genero = models.CharField('Género', max_length=200, blank=True)
+    genero = models.CharField(max_length=4, choices=GENEROS)
     discografica = models.ForeignKey(Discografica, on_delete=models.SET_NULL, null=True, verbose_name='Discográfica')
     duracion = models.DecimalField('Duración total',max_digits=6, decimal_places=2, default=0.00)
-    cover = ResizedImageField(size=[240, 240],quality=100,upload_to="imagenes" ,blank=True, null=True)
+    cover = models.ImageField(default="imagenes/not-found.png",upload_to="imagenes/", blank=True)
 
     def __str__(self):
         return self.titulo

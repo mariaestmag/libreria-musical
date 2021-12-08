@@ -11,20 +11,17 @@
       <th scope="col"></th>
     </tr>
   </thead>
-  {% if albums %}
+
   <tbody>
-    {% for albums in album%}
+    {% for album in albums%}
     <tr>
       <td>{{album.titulo}}</td>
-      <td>{{album.get_artista}}</td>
+      <td>{{album.get_artistas}}</td>
       <td>{{album.get_formato_display}}</td>
       <td><a id="modify-button" class="btn btn-warning" href="{% url 'album_modificar' album.id %}">Modificar</a></td>
     </tr>
     {% endfor %}
   </tbody>
-  {% else %}
-  <p>No hay álbums en la biblioteca.</p>
-{% endif %}
 </table>
 
 {% endblock %}
