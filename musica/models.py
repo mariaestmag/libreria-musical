@@ -18,6 +18,7 @@ class Artista(models.Model):
         context = super().get_context_data(**kwargs)
         context['artistas'] = Artista.objects.all() 
         return context
+    
 
 class Discografica(models.Model):
     nombre = models.CharField('Nombre', max_length=50)
@@ -94,8 +95,6 @@ class Cancion(models.Model):
         context['canciones'] = Cancion.objects.all() 
         return context
     
-    def get_genero(self):
-        return "\n".join([a.genero for a in self.album()])
 
 def get_upload_to(instancia, filename):
     return instancia.get_upload_to(filename)

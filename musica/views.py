@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.contrib.auth.decorators import login_required
 
 def indice(request): 
     '''
@@ -21,42 +21,74 @@ def indice(request):
     context = {'albums': lista_albums}
     return render(request, 'index.html', context)
 
+@login_required
 def albums_mod(request):
+    '''
+    Vista que permite listar y a su vez modificar los registros de álbum
+    '''
     lista_albums = Album.objects.all() 
     context = {'albums': lista_albums}
     return render(request, 'albums/listar_modificar.html', context)
 
+@login_required
 def albums_del(request):
+    '''
+    Vista que permite listar y a su vez eliminar los registros de álbum
+    '''
     lista_albums = Album.objects.all() 
     context = {'albums': lista_albums}
     return render(request, 'albums/listar_eliminar.html', context)
 
+@login_required
 def artistas_mod(request):
+    '''
+    Vista que permite listar y a su vez modificar los registros de artistas
+    '''
     lista_artistas = Artista.objects.all() 
     context = {'artistas': lista_artistas}
     return render(request, 'artistas/listar_modificar.html', context)
 
+@login_required
 def artistas_del(request):
+    '''
+    Vista que permite listar y a su vez eliminar los registros de artistas
+    '''
     lista_artistas = Artista.objects.all() 
     context = {'artistas': lista_artistas}
     return render(request, 'artistas/listar_eliminar.html', context)
 
+@login_required
 def canciones_mod(request):
+    '''
+    Vista que permite listar y a su vez modificar los registros de canciones
+    '''
     lista_canciones = Cancion.objects.all() 
     context = {'canciones': lista_canciones}
     return render(request, 'canciones/listar_modificar.html', context)
 
+@login_required
 def canciones_del(request):
+    '''
+    Vista que permite listar y a su vez eliminar los registros de canciones
+    '''
     lista_canciones = Cancion.objects.all() 
     context = {'canciones': lista_canciones}
     return render(request, 'canciones/listar_eliminar.html', context)
 
+@login_required
 def discograficas_mod(request):
+    '''
+    Vista que permite listar y a su vez modificar los registros de discográficas
+    '''
     lista_discograficas = Discografica.objects.all() 
     context = {'discograficas': lista_discograficas}
     return render(request, 'discograficas/listar_modificar.html', context)
 
+@login_required
 def discograficas_del(request):
+    '''
+    Vista que permite listar y a su vez eliminar los registros de discográficas
+    '''
     lista_discograficas = Discografica.objects.all() 
     context = {'discograficas': lista_discograficas}
     return render(request, 'discograficas/listar_eliminar.html', context)
@@ -94,7 +126,6 @@ class AlbumCreateView(SuccessMessageMixin, CreateView):
     success_url = '/'
     success_message = 'Album creado correctamente'
 
-
 class AlbumUpdateView(SuccessMessageMixin,UpdateView):
     '''
     Clase para modificar álbumes
@@ -104,7 +135,6 @@ class AlbumUpdateView(SuccessMessageMixin,UpdateView):
     template_name = 'albums/modificar.html'
     success_url = '/'
     success_message = 'Album modificado correctamente'
-
 
 class AlbumDeleteView(DeleteView):
     '''
@@ -208,7 +238,6 @@ class CancionCreateView(SuccessMessageMixin, CreateView):
     success_url = '/'
     success_message = 'Cancion creada correctamente'
 
-
 class CancionUpdateView(SuccessMessageMixin,UpdateView):
     '''
     Clase para modificar canciones
@@ -242,6 +271,7 @@ class DiscograficaListView(ListView):
     template_name = 'discograficas/listar.html'
     #paginate_by = 5
     context_object_name = "discograficas"
+
 
 class DiscograficaDetailView(DetailView):
     """

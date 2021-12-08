@@ -2,26 +2,40 @@
 
 {% block content %}
 
-<br><br>
-    <h3>Últimos albums añadidos</h3>
-    <div class="row">
-        {% for album in albums%}
-        <div class="col-sm-2">
-            <div class="card text-center" style="width: 10rem;">
-                {% if album.cover %}
-                <img src="{{ album.cover.url }}" class="card-img-top" alt="preview-album">
-                {% else %}
-                <p>No hay foto</p>
-                {% endif %}
-                <img class="card-img-top">
-                <div class="card-body">
-                    <h5 class="card-title">{{album.titulo}}</h5>
-                    <p class="card-text">{{album.get_artistas}}</p>
-                    <p class="card-text">{{album.discografica}}</p>
-                </div>
+<br>
+{% if user.is_authenticated %}
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Hola {{ user.username }}!</h4>
+    <p>Tranquilo, ya estás dentro. Trastea cuanto quieras :)</p> 
+  </div>
+{% else %}
+<div class="alert alert-danger" role="danger">
+    <h4 class="alert-heading">¿Quién eres?</h4>
+    <p>Deberías iniciar sesión primero o no podrás trabajar con esta web</p>
+    <hr>
+    <p class="mb-0">Haz click en: <a href="{% url 'login' %}">Iniciar Sesión</a></p>
+  </div>
+{% endif %}
+
+<h3>Últimos albums añadidos</h3>
+<div class="row">
+    {% for album in albums%}
+    <div class="col-sm-2">
+        <div class="card text-center" style="width: 10rem;">
+            {% if album.cover %}
+            <img src="{{ album.cover.url }}" class="card-img-top" alt="preview-album">
+            {% else %}
+            <p>No hay foto</p>
+            {% endif %}
+            <img class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{album.titulo}}</h5>
+                <p class="card-text">{{album.get_artistas}}</p>
+                <p class="card-text">{{album.discografica}}</p>
             </div>
         </div>
-        {% endfor %}
     </div>
+    {% endfor %}
+</div>
 
 {% endblock %}
