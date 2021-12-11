@@ -43,9 +43,14 @@ source venv/bin/activate
 
 ```bash
 pip install -r requirements.txt
-```
+```   
+4) Generar la estructura de la base de datos:   
 
-4) Despliega el servidor:
+```bash
+python3 manage.py migrate
+```  
+
+5) Despliega el servidor:
    
 ```bash
 python3 manage.py runserver
