@@ -4,6 +4,8 @@ from django.utils.html import format_html
 
 from .models import Artista, Discografica, Cancion, Album
 
+admin.site.site_header = 'Librería Musical de Pedro'
+
 @admin.register(Artista)
 class ArtistaAdmin(admin.ModelAdmin):
     list_display = ['nombre_artista','pais']
